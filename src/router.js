@@ -1,10 +1,22 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import iView from 'iview';
+import animated from 'animate.css';
+import Home from './views/Home.vue';
 
 Vue.use(Router);
+Vue.use(iView);
+Vue.use(animated);
+// Add a response interceptor
+// eslint-disable-next-line
+axios.interceptors.response.use((response) => {
+  return Promise.resolve(response.data);
+}, (error) => {
+  Vue.prototype.$Message.error('老铁，你的网络不给力啊');
+  return Promise.reject(error);
+});
 Vue.use(VueAxios, axios);
 
 export default new Router({
