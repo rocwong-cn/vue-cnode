@@ -11,6 +11,7 @@ Vue.use(Vuex);
 // 保存应用启动时的初始状态
 const state = {
   topics: [],
+  page: 1,
 };
 export default new Vuex.Store({
   state,

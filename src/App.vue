@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <a href="/?tab=all">
+    <a href="/">
       <img alt='logo' class="logo animated heartBeat" src="https://cnodejs.org/public/images/cnodejs.svg"/>
     </a>
     <Tabbar/>
@@ -10,11 +10,12 @@
 
 <script>
 import Tabbar from '@/components/Tabbar.vue';
+
 export default {
   components: {
     Tabbar,
   },
-}
+};
 </script>
 
 <style lang="scss">

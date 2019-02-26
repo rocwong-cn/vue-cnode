@@ -9,9 +9,10 @@
         <span class="visit">{{topic.visit_count}}</span>
       </span>
 
-      <span v-show="topic.top" class="label">顶</span>
-      <span v-show="topic.good" class="label label-good">精</span>
-      <a class="title" href="#">{{topic.title}}</a>
+      <span v-show="topic.top" class="label">置顶</span>
+      <span v-show="topic.good" class="label label-good">精华</span>
+      <span v-show="!topic.good && !topic.top" class="label label-other">{{ tabName }}</span>
+      <a class="title" href="#" :title="topic.title">{{topic.title}}</a>
       <span class="time">{{formatedTime}}</span>
     </div>
 </template>
@@ -29,6 +30,16 @@ export default {
       const f = formatDate(this.topic.create_at);
       return beautifyDate(f);
     },
+    tabName() {
+      const categories = {
+        good: '精华',
+        share: '分享',
+        ask: '问答',
+        job: '招聘',
+        dev: '客户端测试',
+      };
+      return categories[this.topic.tab];
+    },
   },
 };
 </script>
@@ -44,6 +55,7 @@ export default {
   .avatar {
     width: 30px;
     height: 30px;
+    border-radius: 3px;
   }
   .avatar:hover {
      animation: shake 1s;
@@ -63,7 +75,7 @@ export default {
   }
   .label {
     background: #42b983;
-    padding: 1.5px 5px;
+    padding: 1px 4px 1.5px 4px;
     border-radius: 4px;
     font-size: 12px;
     color: #fff;
@@ -71,6 +83,10 @@ export default {
   }
   .label-good {
     background:coral;
+  }
+  .label-other {
+    background-color: #e5e5e5;
+    color: #999;
   }
   .title {
     max-width: 700px;
@@ -81,6 +97,7 @@ export default {
     font-size: 16px;
     color: #42b983;
     word-spacing: 1.5px;
+    font-weight: 400;
     &:hover {
       color: rgba($color: #42b983, $alpha: 0.7);
     }
